@@ -6,19 +6,41 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f0f0f0;
         }
         .container {
             max-width: 600px;
             margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input, select, button {
-            margin-top: 10px;
-            padding: 10px;
+        h1 {
+            text-align: center;
+        }
+        label, select, input, button {
+            display: block;
             width: 100%;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
         .result {
             margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 5px;
         }
     </style>
     <script>
@@ -55,21 +77,49 @@
             420: 74, 410: 74, 400: 74
         };
 
+        const inferScores = (score, grade) => {
+            if (grade < 9) {
+                const scaleFactor = grade / 9; // Simplified scaling
+                return score * scaleFactor;
+            }
+            return score;
+        };
+
+        const interpolatePercentile = (percentiles, score) => {
+            let lowerScore = Math.floor(score / 10) * 10;
+            let upperScore = Math.ceil(score / 10) * 10;
+
+            if (upperScore > 1600) upperScore = 1600;
+            if (lowerScore < 400) lowerScore = 400;
+
+            let lowerPercentile = percentiles[lowerScore] || 1;
+            let upperPercentile = percentiles[upperScore] || 1;
+
+            let interpolatedPercentile = lowerPercentile + (upperPercentile - lowerPercentile) * (score - lowerScore) / (upperScore - lowerScore);
+
+            return interpolatedPercentile;
+        };
+
         function calculatePercentile() {
             const testType = document.getElementById('testType').value;
+            const grade = parseInt(document.getElementById('grade').value);
             const score = parseInt(document.getElementById('score').value);
+
+            const inferredScore = inferScores(score, grade);
 
             let percentile;
             if (testType === "sat") {
-                percentile = satPercentiles[score] || "N/A";
+                percentile = interpolatePercentile(satPercentiles, inferredScore);
             } else if (testType === "psat") {
-                percentile = psatPercentiles[score] || "N/A";
+                percentile = interpolatePercentile(psatPercentiles, inferredScore);
             }
 
             document.getElementById('result').innerHTML = `
                 <p>Test Type: ${testType.toUpperCase()}</p>
+                <p>Grade: ${grade}</p>
                 <p>Score: ${score}</p>
-                <p>Percentile: ${percentile}</p>
+                <p>Inferred Score: ${inferredScore.toFixed(2)}</p>
+                <p>Percentile: ${percentile.toFixed(4)}</p>
             `;
         }
     </script>
@@ -82,6 +132,8 @@
             <option value="sat">SAT</option>
             <option value="psat">PSAT</option>
         </select>
+        <label for="grade">Enter Grade (K-12):</label>
+        <input type="number" id="grade" min="0" max="12" />
         <label for="score">Enter Your Score:</label>
         <input type="number" id="score" min="200" max="1600" />
         <button onclick="calculatePercentile()">Calculate Percentile</button>
