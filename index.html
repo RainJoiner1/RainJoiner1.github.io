@@ -83,23 +83,31 @@
     <script>
         const percentiles = {
             'SAT': {
-                1400: { '8th': { 'Begin-Year': 99.5, 'Mid-Year': 99, 'End-Year': 98 }, '9th': { 'Begin-Year': 99, 'Mid-Year': 98, 'End-Year': 97 }, '10th': { 'Begin-Year': 98, 'Mid-Year': 97, 'End-Year': 96 }, '11th': { 'Begin-Year': 96.5, 'Mid-Year': 95.5, 'End-Year': 94.5 }, '12th': { 'Begin-Year': 95, 'Mid-Year': 94, 'End-Year': 93 } },
-                1300: { '8th': { 'Begin-Year': 93, 'Mid-Year': 92, 'End-Year': 91 }, '9th': { 'Begin-Year': 92, 'Mid-Year': 91, 'End-Year': 90 }, '10th': { 'Begin-Year': 91, 'Mid-Year': 90, 'End-Year': 89 }, '11th': { 'Begin-Year': 89.5, 'Mid-Year': 88.5, 'End-Year': 87.5 }, '12th': { 'Begin-Year': 88, 'Mid-Year': 87, 'End-Year': 86 } },
-                1200: { '8th': { 'Begin-Year': 87, 'Mid-Year': 86, 'End-Year': 85 }, '9th': { 'Begin-Year': 86, 'Mid-Year': 85, 'End-Year': 84 }, '10th': { 'Begin-Year': 85, 'Mid-Year': 84, 'End-Year': 83 }, '11th': { 'Begin-Year': 83.5, 'Mid-Year': 82.5, 'End-Year': 81.5 }, '12th': { 'Begin-Year': 82, 'Mid-Year': 81, 'End-Year': 80 } },
-                1100: { '8th': { 'Begin-Year': 80, 'Mid-Year': 79, 'End-Year': 78 }, '9th': { 'Begin-Year': 79, 'Mid-Year': 78, 'End-Year': 77 }, '10th': { 'Begin-Year': 78, 'Mid-Year': 77, 'End-Year': 76 }, '11th': { 'Begin-Year': 76.5, 'Mid-Year': 75.5, 'End-Year': 74.5 }, '12th': { 'Begin-Year': 75, 'Mid-Year': 74, 'End-Year': 73 } },
-                1000: { '8th': { 'Begin-Year': 73, 'Mid-Year': 72, 'End-Year': 71 }, '9th': { 'Begin-Year': 72, 'Mid-Year': 71, 'End-Year': 70 }, '10th': { 'Begin-Year': 71, 'Mid-Year': 70, 'End-Year': 69 }, '11th': { 'Begin-Year': 69.5, 'Mid-Year': 68.5, 'End-Year': 67.5 }, '12th': { 'Begin-Year': 68, 'Mid-Year': 67, 'End-Year': 66 } }
+                1600: { '8th': { 'Begin-Year': 99.9, 'Mid-Year': 99.8, 'End-Year': 99.7 }, '9th': { 'Begin-Year': 99.8, 'Mid-Year': 99.7, 'End-Year': 99.6 }, '10th': { 'Begin-Year': 99.7, 'Mid-Year': 99.6, 'End-Year': 99.5 }, '11th': { 'Begin-Year': 99.6, 'Mid-Year': 99.5, 'End-Year': 99.4 }, '12th': { 'Begin-Year': 99.5, 'Mid-Year': 99.4, 'End-Year': 99.3 } },
+                1500: { '8th': { 'Begin-Year': 99.5, 'Mid-Year': 99.4, 'End-Year': 99.3 }, '9th': { 'Begin-Year': 99.4, 'Mid-Year': 99.3, 'End-Year': 99.2 }, '10th': { 'Begin-Year': 99.3, 'Mid-Year': 99.2, 'End-Year': 99.1 }, '11th': { 'Begin-Year': 99.2, 'Mid-Year': 99.1, 'End-Year': 99.0 }, '12th': { 'Begin-Year': 99.1, 'Mid-Year': 99.0, 'End-Year': 98.9 } },
+                1400: { '8th': { 'Begin-Year': 99, 'Mid-Year': 98.5, 'End-Year': 98 }, '9th': { 'Begin-Year': 98.5, 'Mid-Year': 98, 'End-Year': 97.5 }, '10th': { 'Begin-Year': 98, 'Mid-Year': 97.5, 'End-Year': 97 }, '11th': { 'Begin-Year': 97.5, 'Mid-Year': 97, 'End-Year': 96.5 }, '12th': { 'Begin-Year': 97, 'Mid-Year': 96.5, 'End-Year': 96 } },
+                1300: { '8th': { 'Begin-Year': 95, 'Mid-Year': 94.5, 'End-Year': 94 }, '9th': { 'Begin-Year': 94.5, 'Mid-Year': 94, 'End-Year': 93.5 }, '10th': { 'Begin-Year': 94, 'Mid-Year': 93.5, 'End-Year': 93 }, '11th': { 'Begin-Year': 93.5, 'Mid-Year': 93, 'End-Year': 92.5 }, '12th': { 'Begin-Year': 93, 'Mid-Year': 92.5, 'End-Year': 92 } },
+                1200: { '8th': { 'Begin-Year': 91, 'Mid-Year': 90.5, 'End-Year': 90 }, '9th': { 'Begin-Year': 90.5, 'Mid-Year': 90, 'End-Year': 89.5 }, '10th': { 'Begin-Year': 90, 'Mid-Year': 89.5, 'End-Year': 89 }, '11th': { 'Begin-Year': 89.5, 'Mid-Year': 89, 'End-Year': 88.5 }, '12th': { 'Begin-Year': 89, 'Mid-Year': 88.5, 'End-Year': 88 } },
+                1100: { '8th': { 'Begin-Year': 88, 'Mid-Year': 87.5, 'End-Year': 87 }, '9th': { 'Begin-Year': 87.5, 'Mid-Year': 87, 'End-Year': 86.5 }, '10th': { 'Begin-Year': 87, 'Mid-Year': 86.5, 'End-Year': 86 }, '11th': { 'Begin-Year': 86.5, 'Mid-Year': 86, 'End-Year': 85.5 }, '12th': { 'Begin-Year': 86, 'Mid-Year': 85.5, 'End-Year': 85 } },
+                1000: { '8th': { 'Begin-Year': 85, 'Mid-Year': 84.5, 'End-Year': 84 }, '9th': { 'Begin-Year': 84.5, 'Mid-Year': 84, 'End-Year': 83.5 }, '10th': { 'Begin-Year': 84, 'Mid-Year': 83.5, 'End-Year': 83 }, '11th': { 'Begin-Year': 83.5, 'Mid-Year': 83, 'End-Year': 82.5 }, '12th': { 'Begin-Year': 83, 'Mid-Year': 82.5, 'End-Year': 82 } },
+                900: { '8th': { 'Begin-Year': 82, 'Mid-Year': 81.5, 'End-Year': 81 }, '9th': { 'Begin-Year': 81.5, 'Mid-Year': 81, 'End-Year': 80.5 }, '10th': { 'Begin-Year': 81, 'Mid-Year': 80.5, 'End-Year': 80 }, '11th': { 'Begin-Year': 80.5, 'Mid-Year': 80, 'End-Year': 79.5 }, '12th': { 'Begin-Year': 80, 'Mid-Year': 79.5, 'End-Year': 79 } },
+                800: { '8th': { 'Begin-Year': 79, 'Mid-Year': 78.5, 'End-Year': 78 }, '9th': { 'Begin-Year': 78.5, 'Mid-Year': 78, 'End-Year': 77.5 }, '10th': { 'Begin-Year': 78, 'Mid-Year': 77.5, 'End-Year': 77 }, '11th': { 'Begin-Year': 77.5, 'Mid-Year': 77, 'End-Year': 76.5 }, '12th': { 'Begin-Year': 77, 'Mid-Year': 76.5, 'End-Year': 76 } }
             },
             'PSAT 10': {
-                1440: { '10th': { 'Begin-Year': 99, 'Mid-Year': 99.2, 'End-Year': 99.4 }, '9th': { 'Begin-Year': 99.5, 'Mid-Year': 99.6, 'End-Year': 99.7 } },
-                1400: { '10th': { 'Begin-Year': 98.2, 'Mid-Year': 98.4, 'End-Year': 98.6 }, '9th': { 'Begin-Year': 98.7, 'Mid-Year': 98.8, 'End-Year': 98.9 } },
-                1300: { '10th': { 'Begin-Year': 96.2, 'Mid-Year': 96.4, 'End-Year': 96.6 }, '9th': { 'Begin-Year': 96.7, 'Mid-Year': 96.8, 'End-Year': 96.9 } },
-                1200: { '10th': { 'Begin-Year': 92, 'Mid-Year': 93, 'End-Year': 94 }, '9th': { 'Begin-Year': 95, 'Mid-Year': 95.5, 'End-Year': 96 } }
+                1440: { '10th': { 'Begin-Year': 99, 'Mid-Year': 99.2, 'End-Year': 99.4 }, '11th': { 'Begin-Year': 99.5, 'Mid-Year': 99.6, 'End-Year': 99.7 } },
+                1400: { '10th': { 'Begin-Year': 98.2, 'Mid-Year': 98.4, 'End-Year': 98.6 }, '11th': { 'Begin-Year': 98.7, 'Mid-Year': 98.8, 'End-Year': 98.9 } },
+                1300: { '10th': { 'Begin-Year': 96.2, 'Mid-Year': 96.4, 'End-Year': 96.6 }, '11th': { 'Begin-Year': 96.7, 'Mid-Year': 96.8, 'End-Year': 96.9 } },
+                1200: { '10th': { 'Begin-Year': 94.2, 'Mid-Year': 94.4, 'End-Year': 94.6 }, '11th': { 'Begin-Year': 94.7, 'Mid-Year': 94.8, 'End-Year': 94.9 } },
+                1100: { '10th': { 'Begin-Year': 92.2, 'Mid-Year': 92.4, 'End-Year': 92.6 }, '11th': { 'Begin-Year': 92.7, 'Mid-Year': 92.8, 'End-Year': 92.9 } },
+                1000: { '10th': { 'Begin-Year': 90.2, 'Mid-Year': 90.4, 'End-Year': 90.6 }, '11th': { 'Begin-Year': 90.7, 'Mid-Year': 90.8, 'End-Year': 90.9 } }
             },
             'PSAT 8/9': {
-                1440: { '9th': { 'Begin-Year': 99.4, 'Mid-Year': 99.5, 'End-Year': 99.6 }, '8th': { 'Begin-Year': 99.8, 'Mid-Year': 99.85, 'End-Year': 99.9 } },
-                1400: { '9th': { 'Begin-Year': 98.6, 'Mid-Year': 98.7, 'End-Year': 98.8 }, '8th': { 'Begin-Year': 99, 'Mid-Year': 99.1, 'End-Year': 99.2 } },
-                1300: { '9th': { 'Begin-Year': 96.2, 'Mid-Year': 96.3, 'End-Year': 96.4 }, '8th': { 'Begin-Year': 96.5, 'Mid-Year': 96.6, 'End-Year': 96.7 } },
-                1200: { '9th': { 'Begin-Year': 95.4, 'Mid-Year': 95.5, 'End-Year': 95.6 }, '8th': { 'Begin-Year': 95.8, 'Mid-Year': 95.9, 'End-Year': 96.0 } }
+                1440: { '8th': { 'Begin-Year': 99.8, 'Mid-Year': 99.85, 'End-Year': 99.9 }, '9th': { 'Begin-Year': 99.4, 'Mid-Year': 99.5, 'End-Year': 99.6 } },
+                1400: { '8th': { 'Begin-Year': 99.0, 'Mid-Year': 99.1, 'End-Year': 99.2 }, '9th': { 'Begin-Year': 98.6, 'Mid-Year': 98.7, 'End-Year': 98.8 } },
+                1300: { '8th': { 'Begin-Year': 97.0, 'Mid-Year': 97.1, 'End-Year': 97.2 }, '9th': { 'Begin-Year': 96.6, 'Mid-Year': 96.7, 'End-Year': 96.8 } },
+                1200: { '8th': { 'Begin-Year': 95.0, 'Mid-Year': 95.1, 'End-Year': 95.2 }, '9th': { 'Begin-Year': 94.6, 'Mid-Year': 94.7, 'End-Year': 94.8 } },
+                1100: { '8th': { 'Begin-Year': 93.0, 'Mid-Year': 93.1, 'End-Year': 93.2 }, '9th': { 'Begin-Year': 92.6, 'Mid-Year': 92.7, 'End-Year': 92.8 } },
+                1000: { '8th': { 'Begin-Year': 91.0, 'Mid-Year': 91.1, 'End-Year': 91.2 }, '9th': { 'Begin-Year': 90.6, 'Mid-Year': 90.7, 'End-Year': 90.8 } }
             }
         };
 
