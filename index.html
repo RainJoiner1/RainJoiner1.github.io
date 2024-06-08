@@ -48,7 +48,7 @@
     <div class="container">
         <h1>SAT/PSAT Score Percentile Calculator</h1>
         <label for="testType">Select Test Type:</label>
-        <select id="testType">
+        <select id="testType" onchange="updateScoreRange()">
             <option value="SAT">SAT</option>
             <option value="PSAT 8/9">PSAT 8/9</option>
             <option value="PSAT 10">PSAT 10</option>
@@ -88,6 +88,18 @@
             }
         };
 
+        function updateScoreRange() {
+            const testType = document.getElementById('testType').value;
+            const scoreInput = document.getElementById('score');
+            if (testType === "SAT") {
+                scoreInput.min = 400;
+                scoreInput.max = 1600;
+            } else {
+                scoreInput.min = 400;
+                scoreInput.max = 1440;
+            }
+        }
+
         function calculatePercentile() {
             const testType = document.getElementById('testType').value;
             const score = parseInt(document.getElementById('score').value);
@@ -98,33 +110,28 @@
                 return;
             }
 
-            let percentile = null;
             const gradeData = percentileData[testType];
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = '<h2>Results</h2>';
 
             for (const [grade, data] of Object.entries(gradeData)) {
                 let mean = data.mean;
                 let sd = data.sd;
-                let percentileValue = data[yearPeriod];
-                
+                let percentile = data[yearPeriod];
+
                 if (score === mean) {
-                    percentile = percentileValue;
+                    percentile = data[yearPeriod];
                 } else if (score > mean) {
-                    percentile = percentileValue + ((score - mean) / sd) * 10;
+                    percentile = data[yearPeriod] + ((score - mean) / sd) * 10;
                 } else {
-                    percentile = percentileValue - ((mean - score) / sd) * 10;
+                    percentile = data[yearPeriod] - ((mean - score) / sd) * 10;
                 }
 
-                if (percentile !== null) {
-                    document.getElementById('result').innerHTML = `
-                        <h2>Test Type: ${testType}</h2>
-                        <p>Score: ${score}</p>
-                        <p>Grade: ${grade}</p>
-                        <p>Mean: ${mean}</p>
-                        <p>SD: ${sd}</p>
-                        <p>Percentile: ${percentile.toFixed(2)}</p>
-                    `;
-                    break;
-                }
+                percentile = Math.min(100, Math.max(0, percentile)).toFixed(2);
+
+                resultContainer.innerHTML += `
+                    <p>Grade: ${grade} | Mean: ${mean} | SD: ${sd} | Percentile: ${percentile}%</p>
+                `;
             }
         }
     </script>
