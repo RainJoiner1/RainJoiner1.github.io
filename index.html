@@ -148,8 +148,28 @@
                     <p>Score: ${score}</p>
                     <p>Percentile: ${percentile}</p>
                 `;
+
+                updateTable(testType);
             });
         });
+
+        const updateTable = (testType) => {
+            const data = testType === 'SAT' ? satData : psatData[testType];
+            let tableContent = '';
+            for (let grade in data) {
+                tableContent += `
+                    <tr>
+                        <td>${grade}</td>
+                        <td>${data[grade]['mean']}</td>
+                        <td>${data[grade]['sd']}</td>
+                        <td>${data[grade]['begin'][1200]}</td>
+                        <td>${data[grade]['mid'][1200]}</td>
+                        <td>${data[grade]['end'][1200]}</td>
+                    </tr>
+                `;
+            }
+            document.querySelector('tbody').innerHTML = tableContent;
+        };
     </script>
 </head>
 <body>
@@ -185,7 +205,9 @@
                     <th>Grade</th>
                     <th>Mean</th>
                     <th>SD</th>
-                    <th>Percentile</th>
+                    <th>Begin-Year Percentile</th>
+                    <th>Mid-Year Percentile</th>
+                    <th>End-Year Percentile</th>
                 </tr>
             </thead>
             <tbody>
@@ -193,31 +215,41 @@
                     <td>8</td>
                     <td>880</td>
                     <td>200</td>
-                    <td>90</td>
+                    <td>99.5</td>
+                    <td>99</td>
+                    <td>98</td>
                 </tr>
                 <tr>
                     <td>9</td>
                     <td>900</td>
                     <td>200</td>
-                    <td>85</td>
+                    <td>99.5</td>
+                    <td>99</td>
+                    <td>98</td>
                 </tr>
                 <tr>
                     <td>10</td>
                     <td>920</td>
                     <td>200</td>
-                    <td>80</td>
+                    <td>99.5</td>
+                    <td>99</td>
+                    <td>98</td>
                 </tr>
                 <tr>
                     <td>11</td>
                     <td>970</td>
                     <td>200</td>
-                    <td>75</td>
+                    <td>96.5</td>
+                    <td>95.5</td>
+                    <td>94.5</td>
                 </tr>
                 <tr>
                     <td>12</td>
                     <td>1000</td>
                     <td>200</td>
-                    <td>70</td>
+                    <td>95</td>
+                    <td>94</td>
+                    <td>93</td>
                 </tr>
             </tbody>
         </table>
