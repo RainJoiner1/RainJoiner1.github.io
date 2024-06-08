@@ -100,7 +100,7 @@
                 const mean = satData[grade].mean;
                 const sd = satData[grade].sd;
 
-                const adjustedScore = (score - mean) / sd * 100 + mean;
+                const adjustedScore = (score - mean) / sd * 100 + 100;
                 const percentile = calculatePercentile(adjustedScore, grade, period, testType);
                 
                 document.querySelector('.result').innerHTML = `
