@@ -48,6 +48,15 @@
             background: #e9ecef;
             border-radius: 5px;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -115,11 +124,6 @@
             const score = parseInt(document.getElementById('score').value);
             const yearPeriod = document.getElementById('year-period').value;
             const resultDiv = document.getElementById('result');
-
-            if (!score || score < 400 || score > 1600) {
-                resultDiv.innerHTML = 'Please enter a valid score between 400 and 1600.';
-                return;
-            }
 
             let output = `
                 <h2>Results</h2>
