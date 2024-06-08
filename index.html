@@ -9,7 +9,7 @@
             background-color: #f0f0f0;
         }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             background: #fff;
             padding: 20px;
@@ -41,6 +41,19 @@
             padding: 15px;
             background: #e9ecef;
             border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f8f8f8;
         }
     </style>
     <script>
@@ -148,7 +161,7 @@
         <input type="number" id="grade" min="8" max="12">
         
         <label for="score">Enter Your Score:</label>
-        <input type="number" id="score">
+        <input type="number" id="score" min="400" max="1600">
         
         <label for="period">Select Year Period:</label>
         <select id="period">
@@ -160,6 +173,49 @@
         <button>Calculate Percentile</button>
         
         <div class="result"></div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Grade</th>
+                    <th>Mean</th>
+                    <th>SD</th>
+                    <th>Percentile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>8</td>
+                    <td>880</td>
+                    <td>200</td>
+                    <td>90</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>900</td>
+                    <td>200</td>
+                    <td>85</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>920</td>
+                    <td>200</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>970</td>
+                    <td>200</td>
+                    <td>75</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>1000</td>
+                    <td>200</td>
+                    <td>70</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
