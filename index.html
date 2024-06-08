@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAT Score Percentile Calculator</title>
+    <title>SAT/PSAT Score Percentile Calculator</title>
     <style>
         .container {
             max-width: 600px;
@@ -17,11 +17,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>SAT Score Percentile Calculator</h1>
-        <label for="grade">Select Test Type:</label>
+        <h1>SAT/PSAT Score Percentile Calculator</h1>
+        <label for="testType">Select Test Type:</label>
         <select id="testType">
             <option value="SAT">SAT</option>
-            <!-- Add more test types if needed -->
+            <option value="PSAT">PSAT</option>
         </select>
         <br><br>
         <label for="grade">Enter Grade (8-12):</label>
@@ -30,8 +30,8 @@
         <label for="score">Enter Your Score:</label>
         <input type="number" id="score" min="400" max="1600">
         <br><br>
-        <label for="year">Select Year Period:</label>
-        <select id="year">
+        <label for="period">Select Year Period:</label>
+        <select id="period">
             <option value="Begin-Year">Begin-Year</option>
             <option value="Mid-Year">Mid-Year</option>
             <option value="End-Year">End-Year</option>
@@ -53,18 +53,34 @@
             // Add data for other grades if needed
         };
 
+        var psatData = {
+            8: {
+                'Begin-Year': {320: 12, 330: 17, 340: 22, 350: 27, 360: 32, 370: 37, 380: 42, 390: 47, 400: 52, 410: 57, 420: 62, 430: 67, 440: 72, 450: 77, 460: 82, 470: 87, 480: 92, 490: 96, 500: 99},
+                'Mid-Year': {320: 13, 330: 18, 340: 23, 350: 28, 360: 33, 370: 38, 380: 43, 390: 48, 400: 53, 410: 58, 420: 63, 430: 68, 440: 73, 450: 78, 460: 83, 470: 88, 480: 93, 490: 97, 500: 99},
+                'End-Year': {320: 14, 330: 19, 340: 24, 350: 29, 360: 34, 370: 39, 380: 44, 390: 49, 400: 54, 410: 59, 420: 64, 430: 69, 440: 74, 450: 79, 460: 84, 470: 89, 480: 94, 490: 98, 500: 99}
+            },
+            // Add data for other grades if needed
+        };
+
         function calculatePercentile() {
+            var testType = document.getElementById("testType").value;
             var score = parseInt(document.getElementById("score").value);
             var grade = parseInt(document.getElementById("grade").value);
-            var year = document.getElementById("year").value;
+            var period = document.getElementById("period").value;
 
             // Validate input score and grade range
             if (isNaN(score) || isNaN(grade) || score < 400 || score > 1600 || grade < 8 || grade > 12) {
-                alert("Please enter a valid SAT score (between 400 and 1600) and grade level (between 8 and 12).");
+                alert("Please enter a valid score (between 400 and 1600) and grade level (between 8 and 12).");
                 return;
             }
 
-            var data = satData[grade][year];
+            var data;
+            if (testType === "SAT") {
+                data = satData[grade][period];
+            } else if (testType === "PSAT") {
+                data = psatData[grade][period];
+            }
+
             var percentile = data[score] || "N/A";
 
             document.getElementById("percentile").innerText = percentile;
