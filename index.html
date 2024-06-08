@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Score Percentile Calculator</title>
+    <title>SAT Score Percentile Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,9 +66,9 @@
                 'end': {1400: 97, 1390: 96, 1380: 96, 1370: 95, 1360: 94, 1350: 94, 1340: 93, 1330: 92, 1320: 91, 1310: 91, 1300: 90, 1290: 89, 1280: 88, 1270: 87, 1260: 86, 1250: 85, 1240: 84, 1230: 83, 1220: 82, 1210: 81, 1200: 80}
             },
             8: {
-                'begin': {1400: 99.5, 1390: 99.4, 1380: 99.4, 1370: 99.3, 1360: 99.2, 1350: 99.2, 1340: 99.1, 1330: 99, 1320: 98.9, 1310: 98.9, 1300: 98.8, 1290: 98.7, 1280: 98.6, 1270: 98.5, 1260: 98.4, 1250: 98.3, 1240: 98.2, 1230: 98.1, 1220: 98, 1210: 97.9, 1200: 97.8}, 
-                'mid': {1400: 99, 1390: 99, 1380: 99, 1370: 98, 1360: 98, 1350: 98, 1340: 97, 1330: 97, 1320: 97, 1310: 96, 1300: 96, 1290: 96, 1280: 95, 1270: 95, 1260: 95, 1250: 94, 1240: 94, 1230: 94, 1220: 93, 1210: 93, 1200: 93}, 
-                'end': {1400: 98.5, 1390: 98.4, 1380: 98.4, 1370: 98.3, 1360: 98.2, 1350: 98.2, 1340: 98.1, 1330: 98, 1320: 97.9, 1310: 97.9, 1300: 97.8, 1290: 97.7, 1280: 97.6, 1270: 97.5, 1260: 97.4, 1250: 97.3, 1240: 97.2, 1230: 97.1, 1220: 97, 1210: 96.9, 1200: 96.8}
+                'begin': {1400: 99.5, 1390: 98.5, 1380: 98.5, 1370: 97.5, 1360: 96.5, 1350: 96.5, 1340: 95.5, 1330: 94.5, 1320: 93.5, 1310: 93.5, 1300: 92.5, 1290: 91.5, 1280: 90.5, 1270: 89.5, 1260: 88.5, 1250: 87.5, 1240: 86.5, 1230: 85.5, 1220: 84.5, 1210: 83.5, 1200: 82.5}, 
+                'mid': {1400: 98.5, 1390: 97.5, 1380: 97.5, 1370: 96.5, 1360: 95.5, 1350: 95.5, 1340: 94.5, 1330: 93.5, 1320: 92.5, 1310: 92.5, 1300: 91.5, 1290: 90.5, 1280: 89.5, 1270: 88.5, 1260: 87.5, 1250: 86.5, 1240: 85.5, 1230: 84.5, 1220: 83.5, 1210: 82.5, 1200: 81.5}, 
+                'end': {1400: 97.5, 1390: 96.5, 1380: 96.5, 1370: 95.5, 1360: 94.5, 1350: 94.5, 1340: 93.5, 1330: 92.5, 1320: 91.5, 1310: 91.5, 1300: 90.5, 1290: 89.5, 1280: 88.5, 1270: 87.5, 1260: 86.5, 1250: 85.5, 1240: 84.5, 1230: 83.5, 1220: 82.5, 1210: 81.5, 1200: 80.5}
             }
         };
 
@@ -76,8 +76,9 @@
             var score = parseInt(document.getElementById("score").value);
             var grade = parseInt(document.getElementById("grade").value);
 
+            // Validate input score and grade range
             if (isNaN(score) || isNaN(grade) || score < 1200 || score > 1400 || grade < 8 || grade > 12) {
-                alert("Please enter valid SAT score (between 1200 and 1400) and grade level (between 8 and 12).");
+                alert("Please enter a valid SAT score (between 1200 and 1400) and grade level (between 8 and 12).");
                 return;
             }
 
@@ -98,22 +99,23 @@
             document.getElementById("begin").innerText = percentiles['begin'];
             document.getElementById("mid").innerText = percentiles['mid'];
             document.getElementById("end").innerText = percentiles['end'];
+
+            document.getElementById("result").style.display = "block";
         }
     </script>
 </head>
 <body>
     <div class="container">
         <h1>SAT Score Percentile Calculator</h1>
-        <label for="score">Enter SAT Score:</label>
-        <input type="number" id="score" placeholder="Enter SAT Score (1200-1400)">
-        <label for="grade">Enter Grade Level (8-12):</label>
-        <input type="number" id="grade" placeholder="Enter Grade Level (8-12)">
+        <label for="grade">Enter Grade (8-12):</label>
+        <input type="number" id="grade" min="8" max="12">
+        <label for="score">Enter Your Score:</label>
+        <input type="number" id="score" min="1200" max="1400">
         <button onclick="calculatePercentile()">Calculate Percentile</button>
-        <div class="result">
-            <p><strong>Percentile Ranks:</strong></p>
-            <p><strong>Begin:</strong> <span id="begin"></span></p>
-            <p><strong>Mid:</strong> <span id="mid"></span></p>
-            <p><strong>End:</strong> <span id="end"></span></p>
+        <div id="result" class="result" style="display: none;">
+            <p><strong>Begin-Year Percentile:</strong> <span id="begin"></span></p>
+            <p><strong>Mid-Year Percentile:</strong> <span id="mid"></span></p>
+            <p><strong>End-Year Percentile:</strong> <span id="end"></span></p>
         </div>
     </div>
 </body>
