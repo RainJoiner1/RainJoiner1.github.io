@@ -75,7 +75,7 @@
         const calculatePercentile = (score, grade, period, testType) => {
             const gradeData = satData[grade];
             const periodData = gradeData[period];
-            let closestScore = Object.keys(periodData).reduce((prev, curr) => {
+            let closestScore = Object.keys(periodData).sort((a, b) => a - b).reduce((prev, curr) => {
                 return (Math.abs(curr - score) < Math.abs(prev - score) ? curr : prev);
             });
             return periodData[closestScore];
