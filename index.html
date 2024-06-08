@@ -47,7 +47,7 @@
         const satPercentiles = {
             1600: 99, 1590: 99, 1580: 99, 1570: 99, 1560: 99, 1550: 99, 1540: 99, 1530: 99,
             1520: 98, 1510: 98, 1500: 98, 1490: 97, 1480: 97, 1470: 96, 1460: 96, 1450: 96,
-            1440: 95, 1430: 95, 1420: 94, 1410: 94, 1400: 93, 1390: 92, 1380: 92, 1370: 91,
+            1440: 95.5, 1430: 95, 1420: 94, 1410: 94, 1400: 93, 1390: 92, 1380: 92, 1370: 91,
             1360: 90, 1350: 90, 1340: 89, 1330: 88, 1320: 87, 1310: 87, 1300: 86, 1290: 85,
             1280: 84, 1270: 83, 1260: 82, 1250: 81, 1240: 80, 1230: 79, 1220: 78, 1210: 76,
             1200: 75, 1190: 74, 1180: 73, 1170: 71, 1160: 70, 1150: 69, 1140: 67, 1130: 66,
@@ -62,19 +62,19 @@
         };
 
         const psatPercentiles = {
-            1440: 99, 1430: 99, 1420: 99, 1410: 98, 1400: 98, 1390: 98, 1380: 98, 1370: 98,
-            1360: 98, 1350: 97, 1340: 97, 1330: 97, 1320: 97, 1310: 97, 1300: 96, 1290: 96,
-            1280: 96, 1270: 96, 1260: 95, 1250: 95, 1240: 95, 1230: 95, 1220: 94, 1210: 94,
-            1200: 94, 1190: 94, 1180: 93, 1170: 93, 1160: 93, 1150: 93, 1140: 92, 1130: 92,
-            1120: 92, 1110: 92, 1100: 91, 1090: 91, 1080: 91, 1070: 91, 1060: 90, 1050: 90,
-            1040: 90, 1030: 90, 1020: 89, 1010: 89, 1000: 89, 990: 89, 980: 88, 970: 88,
-            960: 88, 950: 88, 940: 87, 930: 87, 920: 87, 910: 87, 900: 86, 890: 86, 880: 86,
-            870: 86, 860: 85, 850: 85, 840: 85, 830: 85, 820: 84, 810: 84, 800: 84, 790: 84,
-            780: 83, 770: 83, 760: 83, 750: 83, 740: 82, 730: 82, 720: 82, 710: 82, 700: 81,
-            690: 81, 680: 81, 670: 81, 660: 80, 650: 80, 640: 80, 630: 80, 620: 79, 610: 79,
-            600: 79, 590: 79, 580: 78, 570: 78, 560: 78, 550: 78, 540: 77, 530: 77, 520: 77,
-            510: 77, 500: 76, 490: 76, 480: 76, 470: 76, 460: 75, 450: 75, 440: 75, 430: 75,
-            420: 74, 410: 74, 400: 74
+            1440: 99, 1430: 99, 1420: 99, 1410: 99, 1400: 99, 1390: 99, 1380: 99, 1370: 99,
+            1360: 99, 1350: 99, 1340: 99, 1330: 99, 1320: 99, 1310: 99, 1300: 98, 1290: 98,
+            1280: 98, 1270: 98, 1260: 97, 1250: 97, 1240: 97, 1230: 97, 1220: 96, 1210: 96,
+            1200: 96, 1190: 95, 1180: 95, 1170: 94, 1160: 94, 1150: 93, 1140: 93, 1130: 92,
+            1120: 91, 1110: 90, 1100: 90, 1090: 89, 1080: 88, 1070: 87, 1060: 86, 1050: 85,
+            1040: 83, 1030: 82, 1020: 81, 1010: 80, 1000: 78, 990: 77, 980: 75, 970: 74,
+            960: 72, 950: 70, 940: 68, 930: 67, 920: 65, 910: 63, 900: 61, 890: 59, 880: 57,
+            870: 55, 860: 53, 850: 51, 840: 49, 830: 47, 820: 44, 810: 42, 800: 40, 790: 38,
+            780: 35, 770: 33, 760: 31, 750: 28, 740: 26, 730: 24, 720: 21, 710: 19, 700: 17,
+            690: 15, 680: 13, 670: 12, 660: 10, 650: 9, 640: 8, 630: 7, 620: 6, 610: 5,
+            600: 5, 590: 4, 580: 3, 570: 3, 560: 3, 550: 2, 540: 2, 530: 2, 520: 2, 510: 1,
+            500: 1, 490: 1, 480: 1, 470: 1, 460: 1, 450: 1, 440: 1, 430: 1, 420: 1, 410: 1,
+            400: 1
         };
 
         const inferScores = (score, grade) => {
@@ -95,32 +95,49 @@
             let lowerPercentile = percentiles[lowerScore] || 1;
             let upperPercentile = percentiles[upperScore] || 1;
 
-            let interpolatedPercentile = lowerPercentile + (upperPercentile - lowerPercentile) * (score - lowerScore) / (upperScore - lowScore);
+            let interpolatedPercentile = lowerPercentile + (upperPercentile - lowerPercentile) * (score - lowerScore) / (upperScore - lowerScore);
 
             return interpolatedPercentile;
-    };
+        };
 
-    function calculatePercentile() {
-        const testType = document.getElementById('testType').value;
-        const grade = parseInt(document.getElementById('grade').value);
-        const score = parseInt(document.getElementById('score').value);
+        function calculatePercentile() {
+            const testType = document.getElementById('testType').value;
+            const grade = parseInt(document.getElementById('grade').value);
+            const score = parseInt(document.getElementById('score').value);
 
-        const inferredScore = inferScores(score, grade);
+            const inferredScore = inferScores(score, grade);
 
-        let percentile;
-        if (testType === "sat") {
-            percentile = interpolatePercentile(satPercentiles, inferredScore);
-        } else if (testType === "psat") {
-            percentile = interpolatePercentile(psatPercentiles, inferredScore);
+            let percentile;
+            if (testType === "sat") {
+                percentile = interpolatePercentile(satPercentiles, inferredScore);
+            } else if (testType === "psat") {
+                percentile = interpolatePercentile(psatPercentiles, inferredScore);
+            }
+
+            document.getElementById('result').innerHTML = `
+                <p>Test Type: ${testType.toUpperCase()}</p>
+                <p>Grade: ${grade}</p>
+                <p>Score: ${score}</p>
+                <p>Inferred Score: ${inferredScore.toFixed(2)}</p>
+                <p>Percentile: ${percentile.toFixed(4)}</p>
+            `;
         }
-
-        document.getElementById('result').innerHTML = `
-            <p>Test Type: ${testType.toUpperCase()}</p>
-            <p>Grade: ${grade}</p>
-            <p>Score: ${score}</p>
-            <p>Inferred Score: ${inferredScore.toFixed(2)}</p>
-            <p>Percentile: ${percentile.toFixed(4)}</p>
-        `;
-    }
-</script>
-
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Score Percentile Calculator</h1>
+        <label for="testType">Select Test Type:</label>
+        <select id="testType">
+            <option value="sat">SAT</option>
+            <option value="psat">PSAT</option>
+        </select>
+        <label for="grade">Enter Grade (K-12):</label>
+        <input type="number" id="grade" min="0" max="12" />
+        <label for="score">Enter Your Score:</label>
+        <input type="number" id="score" min="200" max="1600" />
+        <button onclick="calculatePercentile()">Calculate Percentile</button>
+        <div id="result" class="result"></div>
+    </div>
+</body>
+</html>
