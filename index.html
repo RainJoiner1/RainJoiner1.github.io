@@ -2,42 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAT/PSAT Score Percentile Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 20px;
             background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
         }
         .container {
             max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
+            margin: 0 auto;
             background: #fff;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
         }
-        label {
+        label, select, input, button {
             display: block;
-            margin: 15px 0 5px;
-        }
-        select, input[type="number"], button {
             width: 100%;
-            padding: 10px;
-            margin: 5px 0 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            margin-top: 10px;
         }
         button {
+            padding: 10px;
             background-color: #007BFF;
             color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
             background-color: #0056b3;
@@ -48,127 +43,104 @@
             background: #e9ecef;
             border-radius: 5px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SAT/PSAT Score Percentile Calculator</h1>
-        <label for="test-type">Select Test Type:</label>
-        <select id="test-type">
-            <option value="SAT">SAT</option>
-            <option value="PSAT 10">PSAT 10</option>
-            <option value="PSAT 8/9">PSAT 8/9</option>
-        </select>
-        <label for="score">Enter Your Score:</label>
-        <input type="number" id="score" min="400" max="1600" step="10">
-        <label for="year-period">Select Year Period:</label>
-        <select id="year-period">
-            <option value="Begin-Year">Begin-Year</option>
-            <option value="Mid-Year">Mid-Year</option>
-            <option value="End-Year">End-Year</option>
-        </select>
-        <button onclick="calculatePercentile()">Calculate Percentile</button>
-        <div class="result" id="result"></div>
-    </div>
+<div class="container">
+    <h1>SAT/PSAT Score Percentile Calculator</h1>
+    <label for="testType">Select Test Type:</label>
+    <select id="testType" onchange="updateScoreRange()">
+        <option value="SAT">SAT</option>
+        <option value="PSAT8/9">PSAT 8/9</option>
+        <option value="PSAT10">PSAT 10</option>
+    </select>
 
-    <script>
-        const percentiles = {
-            'SAT': {
-                1600: { '8th': { 'Begin-Year': 99.9, 'Mid-Year': 99.8, 'End-Year': 99.7 }, '9th': { 'Begin-Year': 99.8, 'Mid-Year': 99.7, 'End-Year': 99.6 }, '10th': { 'Begin-Year': 99.7, 'Mid-Year': 99.6, 'End-Year': 99.5 }, '11th': { 'Begin-Year': 99.6, 'Mid-Year': 99.5, 'End-Year': 99.4 }, '12th': { 'Begin-Year': 99.5, 'Mid-Year': 99.4, 'End-Year': 99.3 } },
-                1500: { '8th': { 'Begin-Year': 99.5, 'Mid-Year': 99.4, 'End-Year': 99.3 }, '9th': { 'Begin-Year': 99.4, 'Mid-Year': 99.3, 'End-Year': 99.2 }, '10th': { 'Begin-Year': 99.3, 'Mid-Year': 99.2, 'End-Year': 99.1 }, '11th': { 'Begin-Year': 99.2, 'Mid-Year': 99.1, 'End-Year': 99.0 }, '12th': { 'Begin-Year': 99.1, 'Mid-Year': 99.0, 'End-Year': 98.9 } },
-                1400: { '8th': { 'Begin-Year': 99, 'Mid-Year': 98.5, 'End-Year': 98 }, '9th': { 'Begin-Year': 98.5, 'Mid-Year': 98, 'End-Year': 97.5 }, '10th': { 'Begin-Year': 98, 'Mid-Year': 97.5, 'End-Year': 97 }, '11th': { 'Begin-Year': 97.5, 'Mid-Year': 97, 'End-Year': 96.5 }, '12th': { 'Begin-Year': 97, 'Mid-Year': 96.5, 'End-Year': 96 } },
-                1300: { '8th': { 'Begin-Year': 95, 'Mid-Year': 94.5, 'End-Year': 94 }, '9th': { 'Begin-Year': 94.5, 'Mid-Year': 94, 'End-Year': 93.5 }, '10th': { 'Begin-Year': 94, 'Mid-Year': 93.5, 'End-Year': 93 }, '11th': { 'Begin-Year': 93.5, 'Mid-Year': 93, 'End-Year': 92.5 }, '12th': { 'Begin-Year': 93, 'Mid-Year': 92.5, 'End-Year': 92 } },
-                1200: { '8th': { 'Begin-Year': 91, 'Mid-Year': 90.5, 'End-Year': 90 }, '9th': { 'Begin-Year': 90.5, 'Mid-Year': 90, 'End-Year': 89.5 }, '10th': { 'Begin-Year': 90, 'Mid-Year': 89.5, 'End-Year': 89 }, '11th': { 'Begin-Year': 89.5, 'Mid-Year': 89, 'End-Year': 88.5 }, '12th': { 'Begin-Year': 89, 'Mid-Year': 88.5, 'End-Year': 88 } },
-                1100: { '8th': { 'Begin-Year': 88, 'Mid-Year': 87.5, 'End-Year': 87 }, '9th': { 'Begin-Year': 87.5, 'Mid-Year': 87, 'End-Year': 86.5 }, '10th': { 'Begin-Year': 87, 'Mid-Year': 86.5, 'End-Year': 86 }, '11th': { 'Begin-Year': 86.5, 'Mid-Year': 86, 'End-Year': 85.5 }, '12th': { 'Begin-Year': 86, 'Mid-Year': 85.5, 'End-Year': 85 } },
-                1000: { '8th': { 'Begin-Year': 85, 'Mid-Year': 84.5, 'End-Year': 84 }, '9th': { 'Begin-Year': 84.5, 'Mid-Year': 84, 'End-Year': 83.5 }, '10th': { 'Begin-Year': 84, 'Mid-Year': 83.5, 'End-Year': 83 }, '11th': { 'Begin-Year': 83.5, 'Mid-Year': 83, 'End-Year': 82.5 }, '12th': { 'Begin-Year': 83, 'Mid-Year': 82.5, 'End-Year': 82 } },
-                900: { '8th': { 'Begin-Year': 82, 'Mid-Year': 81.5, 'End-Year': 81 }, '9th': { 'Begin-Year': 81.5, 'Mid-Year': 81, 'End-Year': 80.5 }, '10th': { 'Begin-Year': 81, 'Mid-Year': 80.5, 'End-Year': 80 }, '11th': { 'Begin-Year': 80.5, 'Mid-Year': 80, 'End-Year': 79.5 }, '12th': { 'Begin-Year': 80, 'Mid-Year': 79.5, 'End-Year': 79 } },
-                800: { '8th': { 'Begin-Year': 79, 'Mid-Year': 78.5, 'End-Year': 78 }, '9th': { 'Begin-Year': 78.5, 'Mid-Year': 78, 'End-Year': 77.5 }, '10th': { 'Begin-Year': 78, 'Mid-Year': 77.5, 'End-Year': 77 }, '11th': { 'Begin-Year': 77.5, 'Mid-Year': 77, 'End-Year': 76.5 }, '12th': { 'Begin-Year': 77, 'Mid-Year': 76.5, 'End-Year': 76 } }
-            },
-            'PSAT 10': {
-                1440: { '10th': { 'Begin-Year': 99, 'Mid-Year': 99.2, 'End-Year': 99.4 }, '11th': { 'Begin-Year': 99.5, 'Mid-Year': 99.6, 'End-Year': 99.7 } },
-                1400: { '10th': { 'Begin-Year': 98.2, 'Mid-Year': 98.4, 'End-Year': 98.6 }, '11th': { 'Begin-Year': 98.7, 'Mid-Year': 98.8, 'End-Year': 98.9 } },
-                1300: { '10th': { 'Begin-Year': 96.2, 'Mid-Year': 96.4, 'End-Year': 96.6 }, '11th': { 'Begin-Year': 96.7, 'Mid-Year': 96.8, 'End-Year': 96.9 } },
-                1200: { '10th': { 'Begin-Year': 94.2, 'Mid-Year': 94.4, 'End-Year': 94.6 }, '11th': { 'Begin-Year': 94.7, 'Mid-Year': 94.8, 'End-Year': 94.9 } },
-                1100: { '10th': { 'Begin-Year': 92.2, 'Mid-Year': 92.4, 'End-Year': 92.6 }, '11th': { 'Begin-Year': 92.7, 'Mid-Year': 92.8, 'End-Year': 92.9 } },
-                1000: { '10th': { 'Begin-Year': 90.2, 'Mid-Year': 90.4, 'End-Year': 90.6 }, '11th': { 'Begin-Year': 90.7, 'Mid-Year': 90.8, 'End-Year': 90.9 } }
-            },
-            'PSAT 8/9': {
-                1440: { '8th': { 'Begin-Year': 99.8, 'Mid-Year': 99.85, 'End-Year': 99.9 }, '9th': { 'Begin-Year': 99.4, 'Mid-Year': 99.5, 'End-Year': 99.6 } },
-                1400: { '8th': { 'Begin-Year': 99.0, 'Mid-Year': 99.1, 'End-Year': 99.2 }, '9th': { 'Begin-Year': 98.6, 'Mid-Year': 98.7, 'End-Year': 98.8 } },
-                1300: { '8th': { 'Begin-Year': 97.0, 'Mid-Year': 97.1, 'End-Year': 97.2 }, '9th': { 'Begin-Year': 96.6, 'Mid-Year': 96.7, 'End-Year': 96.8 } },
-                1200: { '8th': { 'Begin-Year': 95.0, 'Mid-Year': 95.1, 'End-Year': 95.2 }, '9th': { 'Begin-Year': 94.6, 'Mid-Year': 94.7, 'End-Year': 94.8 } },
-                1100: { '8th': { 'Begin-Year': 93.0, 'Mid-Year': 93.1, 'End-Year': 93.2 }, '9th': { 'Begin-Year': 92.6, 'Mid-Year': 92.7, 'End-Year': 92.8 } },
-                1000: { '8th': { 'Begin-Year': 91.0, 'Mid-Year': 91.1, 'End-Year': 91.2 }, '9th': { 'Begin-Year': 90.6, 'Mid-Year': 90.7, 'End-Year': 90.8 } }
-            }
-        };
+    <label for="score">Enter Your Score:</label>
+    <input type="number" id="score" placeholder="Enter your score">
 
-        const means = {
-            '8th': 880,
-            '9th': 900,
-            '10th': 940,
-            '11th': 970,
-            '12th': 1000
-        };
+    <label for="yearPeriod">Select Year Period:</label>
+    <select id="yearPeriod">
+        <option value="Begin-Year">Begin-Year</option>
+        <option value="Mid-Year">Mid-Year</option>
+        <option value="End-Year">End-Year</option>
+    </select>
 
-        const sds = {
-            '8th': 200,
-            '9th': 200,
-            '10th': 200,
-            '11th': 200,
-            '12th': 200
-        };
+    <button onclick="calculatePercentile()">Calculate Percentile</button>
 
-        function calculatePercentile() {
-            const testType = document.getElementById('test-type').value;
-            const score = parseInt(document.getElementById('score').value);
-            const yearPeriod = document.getElementById('year-period').value;
-            const resultDiv = document.getElementById('result');
+    <div id="result" class="result"></div>
+</div>
 
-            let output = `
-                <h2>Results</h2>
-                <table>
-                    <tr>
-                        <th>Grade</th>
-                        <th>Mean</th>
-                        <th>SD</th>
-                        <th>Percentile</th>
-                    </tr>
-            `;
+<script>
+    const scoreRanges = {
+        SAT: { min: 400, max: 1600 },
+        PSAT8_9: { min: 320, max: 1520 },
+        PSAT10: { min: 320, max: 1520 }
+    };
 
-            for (let grade in means) {
-                const mean = means[grade];
-                const sd = sds[grade];
-                const percentile = getPercentile(testType, score, grade, yearPeriod);
+    const percentiles = {
+        SAT: {
+            1400: { "Begin-Year": [99, 98.5, 98, 97.5, 97], "Mid-Year": [99, 98.5, 98, 97.5, 97], "End-Year": [99, 98.5, 98, 97.5, 97] },
+            1200: { "Begin-Year": [78, 77.5, 77, 76.5, 76], "Mid-Year": [78, 77.5, 77, 76.5, 76], "End-Year": [78, 77.5, 77, 76.5, 76] },
+            1000: { "Begin-Year": [61, 60.5, 60, 59.5, 59], "Mid-Year": [61, 60.5, 60, 59.5, 59], "End-Year": [61, 60.5, 60, 59.5, 59] }
+        },
+        PSAT8_9: {
+            1440: { "Begin-Year": [99.9, 99.85, 99.8, 99.7], "Mid-Year": [99.9, 99.85, 99.8, 99.7], "End-Year": [99.9, 99.85, 99.8, 99.7] },
+            1200: { "Begin-Year": [98, 97.5, 97, 96.5], "Mid-Year": [98, 97.5, 97, 96.5], "End-Year": [98, 97.5, 97, 96.5] }
+        },
+        PSAT10: {
+            1440: { "Begin-Year": [99.9, 99.85, 99.8, 99.7], "Mid-Year": [99.9, 99.85, 99.8, 99.7], "End-Year": [99.9, 99.85, 99.8, 99.7] },
+            1200: { "Begin-Year": [98, 97.5, 97, 96.5], "Mid-Year": [98, 97.5, 97, 96.5], "End-Year": [98, 97.5, 97, 96.5] }
+        }
+    };
 
-                output += `
-                    <tr>
-                        <td>${grade}</td>
-                        <td>${mean}</td>
-                        <td>${sd}</td>
-                        <td>${percentile}</td>
-                    </tr>
-                `;
-            }
+    function updateScoreRange() {
+        const testType = document.getElementById("testType").value;
+        const scoreInput = document.getElementById("score");
+        scoreInput.min = scoreRanges[testType].min;
+        scoreInput.max = scoreRanges[testType].max;
+        scoreInput.placeholder = `Enter your score (${scoreRanges[testType].min}-${scoreRanges[testType].max})`;
+    }
 
-            output += '</table>';
-            resultDiv.innerHTML = output;
+    function calculatePercentile() {
+        const testType = document.getElementById("testType").value;
+        const score = parseInt(document.getElementById("score").value);
+        const yearPeriod = document.getElementById("yearPeriod").value;
+        let resultDiv = document.getElementById("result");
+
+        let adjustedPercentiles;
+        if (testType === "SAT") {
+            adjustedPercentiles = percentiles.SAT[score][yearPeriod];
+        } else if (testType === "PSAT8/9") {
+            adjustedPercentiles = percentiles.PSAT8_9[score][yearPeriod];
+        } else {
+            adjustedPercentiles = percentiles.PSAT10[score][yearPeriod];
         }
 
-        function getPercentile(testType, score, grade, yearPeriod) {
-            if (percentiles[testType][score] && percentiles[testType][score][grade] && percentiles[testType][score][grade][yearPeriod]) {
-                return percentiles[testType][score][grade][yearPeriod];
-            }
-            return 'N/A';
+        let percentileData = '';
+        for (let i = 0; i < 5; i++) {
+            let grade = `${12 - i}th`;
+            if (i === 4) grade = '8th';
+            percentileData += `
+                <tr>
+                    <td>${grade}</td>
+                    <td>${1000 - (20 * i)}</td>
+                    <td>200</td>
+                    <td>${adjustedPercentiles[i]}</td>
+                </tr>`;
         }
-    </script>
+
+        resultDiv.innerHTML = `
+            <h2>Results</h2>
+            <table>
+                <tr>
+                    <th>Grade</th>
+                    <th>Mean</th>
+                    <th>SD</th>
+                    <th>Percentile</th>
+                </tr>
+                ${percentileData}
+            </table>`;
+    }
+</script>
 </body>
 </html>
