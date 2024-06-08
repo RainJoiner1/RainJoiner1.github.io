@@ -1,122 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAT Score Percentile Calculator</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f0f0f0;
-        }
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
             text-align: center;
-        }
-        label, select, input, button {
-            display: block;
-            width: 100%;
-            margin-top: 10px;
-        }
-        button {
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
         }
         .result {
             margin-top: 20px;
-            padding: 15px;
-            background: #e9ecef;
-            border-radius: 5px;
         }
     </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SAT Score Percentile Calculator</h1>
+        <label for="grade">Select Test Type:</label>
+        <select id="testType">
+            <option value="SAT">SAT</option>
+            <!-- Add more test types if needed -->
+        </select>
+        <br><br>
+        <label for="grade">Enter Grade (8-12):</label>
+        <input type="number" id="grade" min="8" max="12">
+        <br><br>
+        <label for="score">Enter Your Score:</label>
+        <input type="number" id="score" min="400" max="1600">
+        <br><br>
+        <label for="year">Select Year Period:</label>
+        <select id="year">
+            <option value="Begin-Year">Begin-Year</option>
+            <option value="Mid-Year">Mid-Year</option>
+            <option value="End-Year">End-Year</option>
+        </select>
+        <br><br>
+        <button onclick="calculatePercentile()">Calculate Percentile</button>
+        <div id="result" class="result" style="display: none;">
+            <p><strong>Percentile:</strong> <span id="percentile"></span></p>
+        </div>
+    </div>
+
     <script>
-        const satData = {
+        var satData = {
             12: {
-                'begin': {1400: 95, 1390: 94, 1380: 94, 1370: 93, 1360: 92, 1350: 92, 1340: 91, 1330: 90, 1320: 89, 1310: 89, 1300: 88, 1290: 87, 1280: 86, 1270: 85, 1260: 84, 1250: 83, 1240: 82, 1230: 81, 1220: 80, 1210: 79, 1200: 78}, 
-                'mid': {1400: 94, 1390: 93, 1380: 93, 1370: 92, 1360: 91, 1350: 91, 1340: 90, 1330: 89, 1320: 88, 1310: 88, 1300: 87, 1290: 86, 1280: 85, 1270: 84, 1260: 83, 1250: 82, 1240: 81, 1230: 80, 1220: 79, 1210: 78, 1200: 77}, 
-                'end': {1400: 93, 1390: 92, 1380: 92, 1370: 91, 1360: 90, 1350: 90, 1340: 89, 1330: 88, 1320: 87, 1310: 87, 1300: 86, 1290: 85, 1280: 84, 1270: 83, 1260: 82, 1250: 81, 1240: 80, 1230: 79, 1220: 78, 1210: 77, 1200: 76}
+                'Begin-Year': {1400: 99, 1390: 98, 1380: 98, 1370: 97, 1360: 96, 1350: 96, 1340: 95, 1330: 94, 1320: 93, 1310: 93, 1300: 92, 1290: 91, 1280: 90, 1270: 89, 1260: 88, 1250: 87, 1240: 86, 1230: 85, 1220: 84, 1210: 83, 1200: 82},
+                'Mid-Year': {1400: 98, 1390: 97, 1380: 97, 1370: 96, 1360: 95, 1350: 95, 1340: 94, 1330: 93, 1320: 92, 1310: 92, 1300: 91, 1290: 90, 1280: 89, 1270: 88, 1260: 87, 1250: 86, 1240: 85, 1230: 84, 1220: 83, 1210: 82, 1200: 81},
+                'End-Year': {1400: 97, 1390: 96, 1380: 96, 1370: 95, 1360: 94, 1350: 94, 1340: 93, 1330: 92, 1320: 91, 1310: 91, 1300: 90, 1290: 89, 1280: 88, 1270: 87, 1260: 86, 1250: 85, 1240: 84, 1230: 83, 1220: 82, 1210: 81, 1200: 80}
             },
-            11: {
-                'begin': {1400: 96.5, 1390: 95.5, 1380: 95.5, 1370: 94.5, 1360: 93.5, 1350: 93.5, 1340: 92.5, 1330: 91.5, 1320: 90.5, 1310: 90.5, 1300: 89.5, 1290: 88.5, 1280: 87.5, 1270: 86.5, 1260: 85.5, 1250: 84.5, 1240: 83.5, 1230: 82.5, 1220: 81.5, 1210: 80.5, 1200: 79.5}, 
-                'mid': {1400: 95.5, 1390: 94.5, 1380: 94.5, 1370: 93.5, 1360: 92.5, 1350: 92.5, 1340: 91.5, 1330: 90.5, 1320: 89.5, 1310: 89.5, 1300: 88.5, 1290: 87.5, 1280: 86.5, 1270: 85.5, 1260: 84.5, 1250: 83.5, 1240: 82.5, 1230: 81.5, 1220: 80.5, 1210: 79.5, 1200: 78.5}, 
-                'end': {1400: 94.5, 1390: 93.5, 1380: 93.5, 1370: 92.5, 1360: 91.5, 1350: 91.5, 1340: 90.5, 1330: 89.5, 1320: 88.5, 1310: 88.5, 1300: 87.5, 1290: 86.5, 1280: 85.5, 1270: 84.5, 1260: 83.5, 1250: 82.5, 1240: 81.5, 1230: 80.5, 1220: 79.5, 1210: 78.5, 1200: 77.5}
-            },
-            10: {
-                'begin': {1400: 98, 1390: 97, 1380: 97, 1370: 96, 1360: 95, 1350: 95, 1340: 94, 1330: 93, 1320: 92, 1310: 92, 1300: 91, 1290: 90, 1280: 89, 1270: 88, 1260: 87, 1250: 86, 1240: 85, 1230: 84, 1220: 83, 1210: 82, 1200: 81}, 
-                'mid': {1400: 97, 1390: 96, 1380: 96, 1370: 95, 1360: 94, 1350: 94, 1340: 93, 1330: 92, 1320: 91, 1310: 91, 1300: 90, 1290: 89, 1280: 88, 1270: 87, 1260: 86, 1250: 85, 1240: 84, 1230: 83, 1220: 82, 1210: 81, 1200: 80}, 
-                'end': {1400: 96, 1390: 95, 1380: 95, 1370: 94, 1360: 93, 1350: 93, 1340: 92, 1330: 91, 1320: 90, 1310: 90, 1300: 89, 1290: 88, 1280: 87, 1270: 86, 1260: 85, 1250: 84, 1240: 83, 1230: 82, 1220: 81, 1210: 80, 1200: 79}
-            },
-            9: {
-                'begin': {1400: 99, 1390: 98, 1380: 98, 1370: 97, 1360: 96, 1350: 96, 1340: 95, 1330: 94, 1320: 93, 1310: 93, 1300: 92, 1290: 91, 1280: 90, 1270: 89, 1260: 88, 1250: 87, 1240: 86, 1230: 85, 1220: 84, 1210: 83, 1200: 82}, 
-                'mid': {1400: 98, 1390: 97, 1380: 97, 1370: 96, 1360: 95, 1350: 95, 1340: 94, 1330: 93, 1320: 92, 1310: 92, 1300: 91, 1290: 90, 1280: 89, 1270: 88, 1260: 87, 1250: 86, 1240: 85, 1230: 84, 1220: 83, 1210: 82, 1200: 81}, 
-                'end': {1400: 97, 1390: 96, 1380: 96, 1370: 95, 1360: 94, 1350: 94, 1340: 93, 1330: 92, 1320: 91, 1310: 91, 1300: 90, 1290: 89, 1280: 88, 1270: 87, 1260: 86, 1250: 85, 1240: 84, 1230: 83, 1220: 82, 1210: 81, 1200: 80}
-            },
-            8: {
-                'begin': {1400: 99.5, 1390: 98.5, 1380: 98.5, 1370: 97.5, 1360: 96.5, 1350: 96.5, 1340: 95.5, 1330: 94.5, 1320: 93.5, 1310: 93.5, 1300: 92.5, 1290: 91.5, 1280: 90.5, 1270: 89.5, 1260: 88.5, 1250: 87.5, 1240: 86.5, 1230: 85.5, 1220: 84.5, 1210: 83.5, 1200: 82.5}, 
-                'mid': {1400: 98.5, 1390: 97.5, 1380: 97.5, 1370: 96.5, 1360: 95.5, 1350: 95.5, 1340: 94.5, 1330: 93.5, 1320: 92.5, 1310: 92.5, 1300: 91.5, 1290: 90.5, 1280: 89.5, 1270: 88.5, 1260: 87.5, 1250: 86.5, 1240: 85.5, 1230: 84.5, 1220: 83.5, 1210: 82.5, 1200: 81.5}, 
-                'end': {1400: 97.5, 1390: 96.5, 1380: 96.5, 1370: 95.5, 1360: 94.5, 1350: 94.5, 1340: 93.5, 1330: 92.5, 1320: 91.5, 1310: 91.5, 1300: 90.5, 1290: 89.5, 1280: 88.5, 1270: 87.5, 1260: 86.5, 1250: 85.5, 1240: 84.5, 1230: 83.5, 1220: 82.5, 1210: 81.5, 1200: 80.5}
-            }
+            // Add data for other grades if needed
         };
 
         function calculatePercentile() {
             var score = parseInt(document.getElementById("score").value);
             var grade = parseInt(document.getElementById("grade").value);
+            var year = document.getElementById("year").value;
 
             // Validate input score and grade range
-            if (isNaN(score) || isNaN(grade) || score < 1200 || score > 1400 || grade < 8 || grade > 12) {
-                alert("Please enter a valid SAT score (between 1200 and 1400) and grade level (between 8 and 12).");
+            if (isNaN(score) || isNaN(grade) || score < 400 || score > 1600 || grade < 8 || grade > 12) {
+                alert("Please enter a valid SAT score (between 400 and 1600) and grade level (between 8 and 12).");
                 return;
             }
 
-            var data = satData[grade];
-            var percentiles = {};
-            Object.keys(data).forEach(function(key) {
-                var subData = data[key];
-                var percentile = 0;
-                for (var subScore in subData) {
-                    if (score >= parseInt(subScore)) {
-                        percentile = subData[subScore];
-                        break;
-                    }
-                }
-                percentiles[key] = percentile;
-            });
+            var data = satData[grade][year];
+            var percentile = data[score] || "N/A";
 
-            document.getElementById("begin").innerText = percentiles['begin'];
-            document.getElementById("mid").innerText = percentiles['mid'];
-            document.getElementById("end").innerText = percentiles['end'];
-
+            document.getElementById("percentile").innerText = percentile;
             document.getElementById("result").style.display = "block";
         }
     </script>
-</head>
-<body>
-    <div class="container">
-        <h1>SAT Score Percentile Calculator</h1>
-        <label for="grade">Enter Grade (8-12):</label>
-        <input type="number" id="grade" min="8" max="12">
-        <label for="score">Enter Your Score:</label>
-        <input type="number" id="score" min="1200" max="1400">
-        <button onclick="calculatePercentile()">Calculate Percentile</button>
-        <div id="result" class="result" style="display: none;">
-            <p><strong>Begin-Year Percentile:</strong> <span id="begin"></span></p>
-            <p><strong>Mid-Year Percentile:</strong> <span id="mid"></span></p>
-            <p><strong>End-Year Percentile:</strong> <span id="end"></span></p>
-        </div>
-    </div>
 </body>
 </html>
