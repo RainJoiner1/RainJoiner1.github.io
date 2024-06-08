@@ -80,7 +80,7 @@
                 'end': {1400: 96, 1300: 89, 1200: 79, 1100: 62, 1000: 41, 900: 21, 800: 11, 700: 6, 600: 3, 500: 2, 400: 1}
             },
             9: {
-                'mean': 910,
+                'mean': 900,
                 'sd': 200,
                 'begin': {1400: 99, 1300: 92, 1200: 82, 1100: 65, 1000: 44, 900: 24, 800: 14, 700: 9, 600: 4, 500: 3, 400: 1},
                 'mid': {1400: 98, 1300: 91, 1200: 81, 1100: 64, 1000: 43, 900: 23, 800: 13, 700: 8, 600: 4, 500: 3, 400: 1},
@@ -136,35 +136,25 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('button').addEventListener('click', () => {
                 const testType = document.querySelector('#testType').value;
-                const grade = parseInt(document.querySelector('#grade').value);
                 const score = parseInt(document.querySelector('#score').value);
                 const period = document.querySelector('#period').value;
 
-                const percentile = calculatePercentile(score, grade, period, testType);
-                
-                document.querySelector('.result').innerHTML = `
-                    <p>Test Type: ${testType}</p>
-                    <p>Grade: ${grade}</p>
-                    <p>Score: ${score}</p>
-                    <p>Percentile: ${percentile}</p>
-                `;
-
-                updateTable(testType);
+                updateTable(testType, score, period);
             });
         });
 
-        const updateTable = (testType) => {
+        const updateTable = (testType, score, period) => {
             const data = testType === 'SAT' ? satData : psatData[testType];
             let tableContent = '';
             for (let grade in data) {
+                const gradeData = data[grade];
+                const percentile = calculatePercentile(score, grade, period, testType);
                 tableContent += `
                     <tr>
                         <td>${grade}</td>
-                        <td>${data[grade]['mean']}</td>
-                        <td>${data[grade]['sd']}</td>
-                        <td>${data[grade]['begin'][1200]}</td>
-                        <td>${data[grade]['mid'][1200]}</td>
-                        <td>${data[grade]['end'][1200]}</td>
+                        <td>${gradeData.mean}</td>
+                        <td>${gradeData.sd}</td>
+                        <td>${percentile}</td>
                     </tr>
                 `;
             }
@@ -181,9 +171,6 @@
             <option value="PSAT 10">PSAT 10</option>
             <option value="PSAT 8/9">PSAT 8/9</option>
         </select>
-        
-        <label for="grade">Enter Grade (8-12):</label>
-        <input type="number" id="grade" min="8" max="12">
         
         <label for="score">Enter Your Score:</label>
         <input type="number" id="score" min="400" max="1600">
@@ -205,52 +192,11 @@
                     <th>Grade</th>
                     <th>Mean</th>
                     <th>SD</th>
-                    <th>Begin-Year Percentile</th>
-                    <th>Mid-Year Percentile</th>
-                    <th>End-Year Percentile</th>
+                    <th>Percentile</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>8</td>
-                    <td>880</td>
-                    <td>200</td>
-                    <td>99.5</td>
-                    <td>99</td>
-                    <td>98</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>900</td>
-                    <td>200</td>
-                    <td>99.5</td>
-                    <td>99</td>
-                    <td>98</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>920</td>
-                    <td>200</td>
-                    <td>99.5</td>
-                    <td>99</td>
-                    <td>98</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>970</td>
-                    <td>200</td>
-                    <td>96.5</td>
-                    <td>95.5</td>
-                    <td>94.5</td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>1000</td>
-                    <td>200</td>
-                    <td>95</td>
-                    <td>94</td>
-                    <td>93</td>
-                </tr>
+                <!-- Dynamic content will be inserted here -->
             </tbody>
         </table>
     </div>
