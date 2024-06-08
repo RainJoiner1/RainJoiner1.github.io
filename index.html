@@ -68,111 +68,53 @@
             8: {
                 'begin': {1400: 99.5, 1390: 99.4, 1380: 99.4, 1370: 99.3, 1360: 99.2, 1350: 99.2, 1340: 99.1, 1330: 99, 1320: 98.9, 1310: 98.9, 1300: 98.8, 1290: 98.7, 1280: 98.6, 1270: 98.5, 1260: 98.4, 1250: 98.3, 1240: 98.2, 1230: 98.1, 1220: 98, 1210: 97.9, 1200: 97.8}, 
                 'mid': {1400: 99, 1390: 99, 1380: 99, 1370: 98, 1360: 98, 1350: 98, 1340: 97, 1330: 97, 1320: 97, 1310: 96, 1300: 96, 1290: 96, 1280: 95, 1270: 95, 1260: 95, 1250: 94, 1240: 94, 1230: 94, 1220: 93, 1210: 93, 1200: 93}, 
-                'end': {1400: 98, 1390: 98, 1380: 98, 1370: 97, 1360: 97, 1350: 97, 1340: 96, 1330: 96, 1320: 96, 1310: 95, 1300: 95, 1290: 95, 1280: 94, 1270: 94, 1260: 94, 1250: 93, 1240: 93, 1230: 93, 1220: 92, 1210: 92, 1200: 92}
+                'end': {1400: 98.5, 1390: 98.4, 1380: 98.4, 1370: 98.3, 1360: 98.2, 1350: 98.2, 1340: 98.1, 1330: 98, 1320: 97.9, 1310: 97.9, 1300: 97.8, 1290: 97.7, 1280: 97.6, 1270: 97.5, 1260: 97.4, 1250: 97.3, 1240: 97.2, 1230: 97.1, 1220: 97, 1210: 96.9, 1200: 96.8}
             }
         };
-
-        const psatData = {
-            8: {
-                'begin': {320: 10, 330: 15, 340: 20, 350: 25, 360: 30, 370: 35, 380: 40, 390: 45, 400: 50, 410: 55, 420: 60, 430: 65, 440: 70, 450: 75, 460: 80, 470: 85, 480: 90, 490: 95, 500: 97, 510: 98, 520: 98, 530: 99, 540: 99, 550: 99, 560: 99, 570: 99, 580: 99, 590: 99, 600: 99, 610: 99, 620: 99, 630: 99, 640: 99, 650: 99, 660: 99, 670: 99, 680: 99, 690: 99, 700: 99, 710: 99, 720: 99, 730: 99, 740: 99, 750: 99, 760: 99, 770: 99, 780: 99, 790: 99, 800: 99}, 
-                'mid': {320: 11, 330: 16, 340: 21, 350: 26, 360: 31, 370: 36, 380: 41, 390: 46, 400: 51, 410: 56, 420: 61, 430: 66, 440: 71, 450: 76, 460: 81, 470: 86, 480: 91, 490: 95, 500: 98, 510: 99, 520: 99, 530: 99, 540: 99, 550: 99, 560: 99, 570: 99, 580: 99, 590: 99, 600: 99, 610: 99, 620: 99, 630: 99, 640: 99, 650: 99, 660: 99, 670: 99, 680: 99, 690: 99, 700: 99, 710: 99, 720: 99, 730: 99, 740: 99, 750: 99, 760: 99, 770: 99, 780: 99, 790: 99, 800: 99}, 
-                'end': {320: 12, 330: 17, 340: 22, 350: 27, 360: 32, 370: 37, 380: 42, 390: 47, 400: 52, 410: 57, 420: 62, 430: 67, 440: 72, 450: 77, 460: 82, 470: 87, 480: 92, 490: 96, 500: 99, 510: 99, 520: 99, 530: 99, 540: 99, 550: 99, 560: 99, 570: 99, 580: 99, 590: 99, 600: 99, 610: 99, 620: 99, 630: 99, 640: 99, 650: 99, 660: 99, 670: 99, 680: 99, 690: 99, 700: 99, 710: 99, 720: 99, 730: 99, 740: 99, 750: 99, 760: 99, 770: 99, 780: 99, 790: 99, 800: 99}
-            },
-            9: {
-                'begin': {320: 13, 330: 18, 340: 23, 350: 28, 360: 33, 370: 38, 380: 43, 390: 48, 400: 53, 410: 58, 420: 63, 430: 68, 440: 73, 450: 78, 460: 83, 470: 88, 480: 93, 490: 97, 500: 99, 510: 99, 520: 99, 530: 99, 540: 99, 550: 99, 560: 99, 570: 99, 580: 99, 590: 99, 600: 99, 610: 99, 620: 99, 630: 99, 640: 99, 650: 99, 660: 99, 670: 99, 680: 99, 690: 99, 700: 99, 710: 99, 720: 99, 730: 99, 740: 99, 750: 99, 760: 99, 770: 99, 780: 99, 790: 99, 800: 99}, 
-                'mid': {320: 14, 330: 19, 340: 24, 350: 29, 360: 34, 370: 39, 380: 44, 390: 49, 400: 54, 410: 59, 420: 64, 430: 69, 440: 74, 450: 79, 460: 84, 470: 89, 480: 94, 490: 98, 500: 99, 510: 99, 520: 99, 530: 99, 540: 99, 550: 99, 560: 99, 570: 99, 580: 99, 590: 99, 600: 99, 610: 99, 620: 99, 630: 99, 640: 99, 650: 99, 660: 99, 670: 99, 680: 99, 690: 99, 700: 99, 710: 99, 720: 99, 730: 99, 740: 99, 750: 99, 760: 99, 770: 99, 780: 99, 790: 99, 800: 99}, 
-                'end': {320: 15, 330: 20, 340: 25, 350: 30, 360: 35, 370: 40, 380: 45, 390: 50, 400: 55, 410: 60, 420: 65, 430: 70, 440: 75, 450: 80, 460: 85, 470: 90, 480: 95, 490: 99, 500: 99, 510: 99, 520: 99, 530: 99, 540: 99, 550: 99, 560: 99, 570: 99, 580: 99, 590: 99, 600: 99, 610: 99, 620: 99, 630: 99, 640: 99, 650: 99, 660: 99, 670: 99, 680: 99, 690: 99, 700: 99, 710: 99, 720: 99, 730: 99, 740: 99, 750: 99, 760: 99, 770: 99, 780: 99, 790: 99, 800: 99}
-            }
-        };
-
-        function calculateSATPercentile(grade, score, period) {
-            if (grade < 8 || grade > 12) {
-                return "Invalid grade. Please enter a grade between 8 and 12.";
-            }
-
-            if (score < 400 || score > 1600) {
-                return "Invalid SAT score. Please enter a score between 400 and 1600.";
-            }
-
-            const data = satData[grade];
-
-            let percentile;
-
-            if (score >= 1200 && score <= 1400) {
-                percentile = data[period][score];
-            } else if (score < 1200) {
-                percentile = data[period][1200];
-            } else {
-                percentile = data[period][1400];
-            }
-
-            return percentile;
-        }
-
-        function calculatePSATPercentile(grade, score, period) {
-            if (grade < 8 || grade > 9) {
-                return "Invalid grade. Please enter a grade of 8 or 9.";
-            }
-
-            if (score < 320 || score > 800) {
-                return "Invalid PSAT score. Please enter a score between 320 and 800.";
-            }
-
-            const data = psatData[grade];
-
-            let percentile;
-
-            if (score >= 320 && score <= 500) {
-                percentile = data[period][score];
-            } else if (score < 320) {
-                percentile = data[period][320];
-            } else {
-                percentile = data[period][500];
-            }
-
-            return percentile;
-        }
 
         function calculatePercentile() {
-            const testType = document.getElementById('testType').value;
-            const grade = parseInt(document.getElementById('grade').value);
-            const score = parseInt(document.getElementById('score').value);
-            const period = document.getElementById('period').value;
+            var score = parseInt(document.getElementById("score").value);
+            var grade = parseInt(document.getElementById("grade").value);
 
-            let percentile;
-
-            if (testType === 'SAT') {
-                percentile = calculateSATPercentile(grade, score, period);
-            } else if (testType === 'PSAT') {
-                percentile = calculatePSATPercentile(grade, score, period);
+            if (isNaN(score) || isNaN(grade) || score < 1200 || score > 1400 || grade < 8 || grade > 12) {
+                alert("Please enter valid SAT score (between 1200 and 1400) and grade level (between 8 and 12).");
+                return;
             }
 
-            if (percentile !== undefined) {
-                document.getElementById('result').innerText = "Percentile: " + percentile;
-            }
+            var data = satData[grade];
+            var percentiles = {};
+            Object.keys(data).forEach(function(key) {
+                var subData = data[key];
+                var percentile = 0;
+                for (var subScore in subData) {
+                    if (score >= parseInt(subScore)) {
+                        percentile = subData[subScore];
+                        break;
+                    }
+                }
+                percentiles[key] = percentile;
+            });
+
+            document.getElementById("begin").innerText = percentiles['begin'];
+            document.getElementById("mid").innerText = percentiles['mid'];
+            document.getElementById("end").innerText = percentiles['end'];
         }
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>Test Score Percentile Calculator</h1>
-        <label for="testType">Select Test Type:</label>
-        <select id="testType">
-            <option value="SAT">SAT</option>
-            <option value="PSAT">PSAT</option>
-        </select>
-        <label for="grade">Enter Grade (8-12):</label>
-        <input type="number" id="grade" min="8" max="12">
-        <label for="score">Enter Your Score:</label>
-        <input type="number" id="score">
-        <label for="period">Select Year Period:</label>
-        <select id="period">
-            <option value="begin">Begin-Year</option>
-            <option value="mid">Mid-Year</option>
-            <option value="end">End-Year</option>
-        </select>
+        <h1>SAT Score Percentile Calculator</h1>
+        <label for="score">Enter SAT Score:</label>
+        <input type="number" id="score" placeholder="Enter SAT Score (1200-1400)">
+        <label for="grade">Enter Grade Level (8-12):</label>
+        <input type="number" id="grade" placeholder="Enter Grade Level (8-12)">
         <button onclick="calculatePercentile()">Calculate Percentile</button>
-        <div id="result" class="result"></div>
+        <div class="result">
+            <p><strong>Percentile Ranks:</strong></p>
+            <p><strong>Begin:</strong> <span id="begin"></span></p>
+            <p><strong>Mid:</strong> <span id="mid"></span></p>
+            <p><strong>End:</strong> <span id="end"></span></p>
+        </div>
     </div>
 </body>
 </html>
