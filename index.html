@@ -9,7 +9,7 @@
             background-color: #f0f0f0;
         }
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             background: #fff;
             padding: 20px;
@@ -42,121 +42,7 @@
             background: #e9ecef;
             border-radius: 5px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        th {
-            background-color: #f8f8f8;
-        }
     </style>
-    <script>
-        const percentileData = {
-            SAT: {
-                12: {
-                    'mean': 1000,
-                    'sd': 200,
-                    'begin': {1600: 99.9, 1500: 99.7, 1400: 99.2, 1300: 95, 1200: 88, 1100: 78, 1000: 61, 900: 40, 800: 20, 700: 10, 600: 5, 500: 3, 400: 1},
-                    'mid': {1600: 99.8, 1500: 99.6, 1400: 98.9, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'end': {1600: 99.7, 1500: 99.5, 1400: 98.5, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1}
-                },
-                11: {
-                    'mean': 970,
-                    'sd': 200,
-                    'begin': {1600: 99.9, 1500: 99.6, 1400: 99.1, 1300: 95, 1200: 88, 1100: 78, 1000: 61, 900: 40, 800: 20, 700: 10, 600: 5, 500: 3, 400: 1},
-                    'mid': {1600: 99.8, 1500: 99.5, 1400: 98.8, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'end': {1600: 99.7, 1500: 99.4, 1400: 98.3, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1}
-                },
-                10: {
-                    'mean': 940,
-                    'sd': 200,
-                    'begin': {1600: 99.8, 1500: 99.5, 1400: 99.0, 1300: 95, 1200: 88, 1100: 78, 1000: 61, 900: 40, 800: 20, 700: 10, 600: 5, 500: 3, 400: 1},
-                    'mid': {1600: 99.7, 1500: 99.4, 1400: 98.7, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'end': {1600: 99.6, 1500: 99.3, 1400: 98.2, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1}
-                },
-                9: {
-                    'mean': 900,
-                    'sd': 200,
-                    'begin': {1600: 99.7, 1500: 99.4, 1400: 99.0, 1300: 95, 1200: 88, 1100: 78, 1000: 61, 900: 40, 800: 20, 700: 10, 600: 5, 500: 3, 400: 1},
-                    'mid': {1600: 99.6, 1500: 99.3, 1400: 98.6, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'end': {1600: 99.5, 1500: 99.2, 1400: 98.0, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1}
-                },
-                8: {
-                    'mean': 880,
-                    'sd': 200,
-                    'begin': {1600: 99.6, 1500: 99.3, 1400: 99.0, 1300: 95, 1200: 88, 1100: 78, 1000: 61, 900: 40, 800: 20, 700: 10, 600: 5, 500: 3, 400: 1},
-                    'mid': {1600: 99.5, 1500: 99.2, 1400: 98.5, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'end': {1600: 99.4, 1500: 99.0, 1400: 98.0, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1}
-                }
-            },
-            'PSAT 10': {
-                10: {
-                    'mean': 920,
-                    'sd': 200,
-                    'begin': {1520: 99.8, 1400: 98.8, 1300: 95, 1200: 88, 1100: 78, 1000: 61, 900: 40, 800: 20, 700: 10, 600: 5, 500: 3, 400: 1},
-                    'mid': {1520: 99.7, 1400: 98.7, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'end': {1520: 99.6, 1400: 98.6, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1}
-                },
-                9: {
-                    'mean': 900,
-                    'sd': 200,
-                    'begin': {1520: 99.6, 1400: 98.6, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'mid': {1520: 99.5, 1400: 98.5, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1},
-                    'end': {1520: 99.4, 1400: 98.4, 1300: 92, 1200: 85, 1100: 75, 1000: 58, 900: 37, 800: 17, 700: 7, 600: 4, 500: 2, 400: 1}
-                }
-            },
-            'PSAT 8/9': {
-                9: {
-                    'mean': 900,
-                    'sd': 200,
-                    'begin': {1440: 99.8, 1400: 98.8, 1300: 95, 1200: 88, 1100: 78, 1000: 61, 900: 40, 800: 20, 700: 10, 600: 5, 500: 3, 400: 1},
-                    'mid': {1440: 99.7, 1400: 98.7, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'end': {1440: 99.6, 1400: 98.6, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1}
-                },
-                8: {
-                    'mean': 880,
-                    'sd': 200,
-                    'begin': {1440: 99.7, 1400: 98.7, 1300: 95, 1200: 88, 1100: 78, 1000: 61, 900: 40, 800: 20, 700: 10, 600: 5, 500: 3, 400: 1},
-                    'mid': {1440: 99.6, 1400: 98.6, 1300: 94, 1200: 87, 1100: 77, 1000: 60, 900: 39, 800: 19, 700: 9, 600: 5, 500: 3, 400: 1},
-                    'end': {1440: 99.5, 1400: 98.5, 1300: 93, 1200: 86, 1100: 76, 1000: 59, 900: 38, 800: 18, 700: 8, 600: 5, 500: 3, 400: 1}
-                }
-            }
-        };
-
-        function calculatePercentile() {
-            const testType = document.getElementById("testType").value;
-            const score = parseInt(document.getElementById("score").value);
-            const yearPeriod = document.getElementById("yearPeriod").value;
-
-            if (!percentileData[testType]) {
-                alert("Invalid test type selected");
-                return;
-            }
-
-            let resultHtml = "<table><tr><th>Grade</th><th>Mean</th><th>SD</th><th>Percentile</th></tr>";
-            const grades = Object.keys(percentileData[testType]);
-
-            grades.forEach(grade => {
-                const gradeData = percentileData[testType][grade];
-                const mean = gradeData.mean;
-                const sd = gradeData.sd;
-                const percentiles = gradeData[yearPeriod];
-                const percentile = percentiles[score] || "N/A";
-
-                resultHtml += `<tr><td>${grade}</td><td>${mean}</td><td>${sd}</td><td>${percentile}</td></tr>`;
-            });
-
-            resultHtml += "</table>";
-
-            document.getElementById("result").innerHTML = resultHtml;
-        }
-    </script>
 </head>
 <body>
     <div class="container">
@@ -164,12 +50,12 @@
         <label for="testType">Select Test Type:</label>
         <select id="testType">
             <option value="SAT">SAT</option>
-            <option value="PSAT 10">PSAT 10</option>
             <option value="PSAT 8/9">PSAT 8/9</option>
+            <option value="PSAT 10">PSAT 10</option>
         </select>
-
+        
         <label for="score">Enter Your Score:</label>
-        <input type="number" id="score" min="400" max="1600">
+        <input type="number" id="score" min="400" max="1600" />
 
         <label for="yearPeriod">Select Year Period:</label>
         <select id="yearPeriod">
@@ -177,10 +63,70 @@
             <option value="mid">Mid-Year</option>
             <option value="end">End-Year</option>
         </select>
-
+        
         <button onclick="calculatePercentile()">Calculate Percentile</button>
 
-        <div id="result" class="result"></div>
+        <div class="result" id="result"></div>
     </div>
+
+    <script>
+        const percentileData = {
+            SAT: {
+                12: { 'mean': 1000, 'sd': 200, 'begin': 78, 'mid': 77, 'end': 76 },
+                11: { 'mean': 970, 'sd': 200, 'begin': 77, 'mid': 76, 'end': 75 },
+                10: { 'mean': 940, 'sd': 200, 'begin': 76, 'mid': 75, 'end': 74 },
+                9: { 'mean': 900, 'sd': 200, 'begin': 75, 'mid': 74, 'end': 73 },
+                8: { 'mean': 880, 'sd': 200, 'begin': 74, 'mid': 73, 'end': 72 }
+            },
+            "PSAT 8/9": {
+                9: { 'mean': 900, 'sd': 200, 'begin': 96.8, 'mid': 96.9, 'end': 97.0 },
+                8: { 'mean': 880, 'sd': 200, 'begin': 95.8, 'mid': 95.9, 'end': 96.0 }
+            },
+            "PSAT 10": {
+                10: { 'mean': 940, 'sd': 200, 'begin': 78, 'mid': 77, 'end': 76 },
+                11: { 'mean': 970, 'sd': 200, 'begin': 77, 'mid': 76, 'end': 75 }
+            }
+        };
+
+        function calculatePercentile() {
+            const testType = document.getElementById('testType').value;
+            const score = parseInt(document.getElementById('score').value);
+            const yearPeriod = document.getElementById('yearPeriod').value;
+            
+            if (isNaN(score)) {
+                alert("Please enter a valid score.");
+                return;
+            }
+
+            let percentile = null;
+            const gradeData = percentileData[testType];
+
+            for (const [grade, data] of Object.entries(gradeData)) {
+                let mean = data.mean;
+                let sd = data.sd;
+                let percentileValue = data[yearPeriod];
+                
+                if (score === mean) {
+                    percentile = percentileValue;
+                } else if (score > mean) {
+                    percentile = percentileValue + ((score - mean) / sd) * 10;
+                } else {
+                    percentile = percentileValue - ((mean - score) / sd) * 10;
+                }
+
+                if (percentile !== null) {
+                    document.getElementById('result').innerHTML = `
+                        <h2>Test Type: ${testType}</h2>
+                        <p>Score: ${score}</p>
+                        <p>Grade: ${grade}</p>
+                        <p>Mean: ${mean}</p>
+                        <p>SD: ${sd}</p>
+                        <p>Percentile: ${percentile.toFixed(2)}</p>
+                    `;
+                    break;
+                }
+            }
+        }
+    </script>
 </body>
 </html>
