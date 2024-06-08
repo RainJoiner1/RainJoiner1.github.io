@@ -95,49 +95,32 @@
             let lowerPercentile = percentiles[lowerScore] || 1;
             let upperPercentile = percentiles[upperScore] || 1;
 
-            let interpolatedPercentile = lowerPercentile + (upperPercentile - lowerPercentile) * (score - lowerScore) / (upperScore - lowerScore);
+            let interpolatedPercentile = lowerPercentile + (upperPercentile - lowerPercentile) * (score - lowerScore) / (upperScore - lowScore);
 
             return interpolatedPercentile;
-        };
+    };
 
-        function calculatePercentile() {
-            const testType = document.getElementById('testType').value;
-            const grade = parseInt(document.getElementById('grade').value);
-            const score = parseInt(document.getElementById('score').value);
+    function calculatePercentile() {
+        const testType = document.getElementById('testType').value;
+        const grade = parseInt(document.getElementById('grade').value);
+        const score = parseInt(document.getElementById('score').value);
 
-            const inferredScore = inferScores(score, grade);
+        const inferredScore = inferScores(score, grade);
 
-            let percentile;
-            if (testType === "sat") {
-                percentile = interpolatePercentile(satPercentiles, inferredScore);
-            } else if (testType === "psat") {
-                percentile = interpolatePercentile(psatPercentiles, inferredScore);
-            }
-
-            document.getElementById('result').innerHTML = `
-                <p>Test Type: ${testType.toUpperCase()}</p>
-                <p>Grade: ${grade}</p>
-                <p>Score: ${score}</p>
-                <p>Inferred Score: ${inferredScore.toFixed(2)}</p>
-                <p>Percentile: ${percentile.toFixed(4)}</p>
-            `;
+        let percentile;
+        if (testType === "sat") {
+            percentile = interpolatePercentile(satPercentiles, inferredScore);
+        } else if (testType === "psat") {
+            percentile = interpolatePercentile(psatPercentiles, inferredScore);
         }
-    </script>
-</head>
-<body>
-    <div class="container">
-        <h1>Test Score Percentile Calculator</h1>
-        <label for="testType">Select Test Type:</label>
-        <select id="testType">
-            <option value="sat">SAT</option>
-            <option value="psat">PSAT</option>
-        </select>
-        <label for="grade">Enter Grade (K-12):</label>
-        <input type="number" id="grade" min="0" max="12" />
-        <label for="score">Enter Your Score:</label>
-        <input type="number" id="score" min="200" max="1600" />
-        <button onclick="calculatePercentile()">Calculate Percentile</button>
-        <div id="result" class="result"></div>
-    </div>
-</body>
-</html>
+
+        document.getElementById('result').innerHTML = `
+            <p>Test Type: ${testType.toUpperCase()}</p>
+            <p>Grade: ${grade}</p>
+            <p>Score: ${score}</p>
+            <p>Inferred Score: ${inferredScore.toFixed(2)}</p>
+            <p>Percentile: ${percentile.toFixed(4)}</p>
+        `;
+    }
+</script>
+
