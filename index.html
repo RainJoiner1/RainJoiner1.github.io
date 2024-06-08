@@ -95,7 +95,6 @@
             var grade = parseInt(document.getElementById("grade").value);
             var period = document.getElementById("period").value;
 
-            // Validate input score and grade range
             if (isNaN(score) || isNaN(grade) || score < 400 || score > 1600 || grade < 8 || grade > 12) {
                 alert("Please enter a valid score (between 400 and 1600) and grade level (between 8 and 12).");
                 return;
@@ -108,7 +107,6 @@
                 data = psatData[grade][period];
             }
 
-            // Find the nearest score available in the data
             var closestScore = Object.keys(data).reduce(function(prev, curr) {
                 return Math.abs(curr - score) < Math.abs(prev - score) ? curr : prev;
             });
