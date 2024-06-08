@@ -122,6 +122,10 @@
                 <p>Percentile: ${percentile.toFixed(4)}</p>
             `;
         }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('calculateButton').addEventListener('click', calculatePercentile);
+        });
     </script>
 </head>
 <body>
@@ -136,7 +140,7 @@
         <input type="number" id="grade" min="0" max="12" />
         <label for="score">Enter Your Score:</label>
         <input type="number" id="score" min="200" max="1600" />
-        <button onclick="calculatePercentile()">Calculate Percentile</button>
+        <button id="calculateButton">Calculate Percentile</button>
         <div id="result" class="result"></div>
     </div>
 </body>
