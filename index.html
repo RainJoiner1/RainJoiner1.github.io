@@ -108,7 +108,12 @@
                 data = psatData[grade][period];
             }
 
-            var percentile = data[score] || "N/A";
+            // Find the nearest score available in the data
+            var closestScore = Object.keys(data).reduce(function(prev, curr) {
+                return Math.abs(curr - score) < Math.abs(prev - score) ? curr : prev;
+            });
+
+            var percentile = data[closestScore];
 
             document.getElementById("percentile").innerText = percentile;
             document.getElementById("result").style.display = "block";
