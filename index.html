@@ -5,13 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAT/PSAT Score Percentile Calculator</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
         .container {
             max-width: 600px;
             margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
             text-align: center;
+        }
+        label, select, input, button {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
         .result {
             margin-top: 20px;
+            padding: 15px;
+            background: #e9ecef;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -23,20 +54,16 @@
             <option value="SAT">SAT</option>
             <option value="PSAT">PSAT</option>
         </select>
-        <br><br>
         <label for="grade">Enter Grade (8-12):</label>
         <input type="number" id="grade" min="8" max="12">
-        <br><br>
         <label for="score">Enter Your Score:</label>
         <input type="number" id="score" min="400" max="1600">
-        <br><br>
         <label for="period">Select Year Period:</label>
         <select id="period">
             <option value="Begin-Year">Begin-Year</option>
             <option value="Mid-Year">Mid-Year</option>
             <option value="End-Year">End-Year</option>
         </select>
-        <br><br>
         <button onclick="calculatePercentile()">Calculate Percentile</button>
         <div id="result" class="result" style="display: none;">
             <p><strong>Percentile:</strong> <span id="percentile"></span></p>
@@ -55,9 +82,9 @@
 
         var psatData = {
             8: {
-                'Begin-Year': {320: 12, 330: 17, 340: 22, 350: 27, 360: 32, 370: 37, 380: 42, 390: 47, 400: 52, 410: 57, 420: 62, 430: 67, 440: 72, 450: 77, 460: 82, 470: 87, 480: 92, 490: 96, 500: 99},
-                'Mid-Year': {320: 13, 330: 18, 340: 23, 350: 28, 360: 33, 370: 38, 380: 43, 390: 48, 400: 53, 410: 58, 420: 63, 430: 68, 440: 73, 450: 78, 460: 83, 470: 88, 480: 93, 490: 97, 500: 99},
-                'End-Year': {320: 14, 330: 19, 340: 24, 350: 29, 360: 34, 370: 39, 380: 44, 390: 49, 400: 54, 410: 59, 420: 64, 430: 69, 440: 74, 450: 79, 460: 84, 470: 89, 480: 94, 490: 98, 500: 99}
+                'Begin-Year': {320: 10, 330: 15, 340: 20, 350: 25, 360: 30, 370: 35, 380: 40, 390: 45, 400: 50, 410: 55, 420: 60, 430: 65, 440: 70, 450: 75, 460: 80, 470: 85, 480: 90, 490: 95, 500: 97},
+                'Mid-Year': {320: 11, 330: 16, 340: 21, 350: 26, 360: 31, 370: 36, 380: 41, 390: 46, 400: 51, 410: 56, 420: 61, 430: 66, 440: 71, 450: 76, 460: 81, 470: 86, 480: 91, 490: 95, 500: 98},
+                'End-Year': {320: 12, 330: 17, 340: 22, 350: 27, 360: 32, 370: 37, 380: 42, 390: 47, 400: 52, 410: 57, 420: 62, 430: 67, 440: 72, 450: 77, 460: 82, 470: 87, 480: 92, 490: 96, 500: 99}
             },
             // Add data for other grades if needed
         };
